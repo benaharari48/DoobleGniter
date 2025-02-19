@@ -1,0 +1,119 @@
+/* main.css for WordPress theme */
+
+/*
+|--------------------------------------------------------------------------
+| Main Styles for Header and Footer
+|--------------------------------------------------------------------------
+|
+| This CSS mimics the structure of the CodeIgniter homepage.
+| It includes basic navigation styles for both header and footer.
+|
+*/
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header Styles */
+header {
+    background-color: #dd4814;
+    padding: 20px 0;
+}
+
+nav {
+    text-align: center;
+}
+
+nav .main-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+nav .main-nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav .main-nav li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav .main-nav li a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer nav .footer-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+footer nav .footer-nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+footer nav .footer-nav li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+footer nav .footer-nav li a:hover {
+    text-decoration: underline;
+}
+
+footer p {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+
+/* Override Bootstrap .btn-primary styles */
+.btn-primary {
+    --bs-btn-color: #fff; /* Text color */
+    --bs-btn-bg: #FF5733; /* Custom background color */
+    --bs-btn-border-color: #FF5733; /* Border color */
+
+    /* Hover state */
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #E64A19; /* Darker shade for hover */
+    --bs-btn-hover-border-color: #D43F00; /* Darker border on hover */
+
+    /* Focus state */
+    --bs-btn-focus-shadow-rgb: 255, 87, 51; /* Focus shadow color (RGB format) */
+
+    /* Active state */
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #D43F00; /* Active background color */
+    --bs-btn-active-border-color: #D43F00;
+
+    /* Disabled state */
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #FF5733;
+    --bs-btn-disabled-border-color: #FF5733;
+}

@@ -5,10 +5,7 @@ Here's a `README.md` file tailored for your WordPress theme **DoobleGniter** bas
 # DoobleGniter Theme
 
 **Version:** 1.0.0  
-**Author:** [Your Name or Company]  
-**License:** [Your Theme License]  
-**License URI:** [Your License URL]  
-**Theme URI:** [Your Theme URL]  
+**Author:** Dooble
 **Description:** DoobleGniter is a fully responsive, SEO-optimized WordPress theme designed to provide an intuitive and beautiful user experience with rich customization options and support for multiple features like WooCommerce, custom post types, and more.
 
 ## Table of Contents

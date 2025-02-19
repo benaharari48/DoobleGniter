@@ -1,0 +1,18 @@
+/*
+Theme Name: DoobleGniter
+Description: WordPress theme based on the app directory of CodeIgniter
+Version: 1.0
+Author: Dooble
+*/
+
+:root {
+    --primary-color: #dd4814;
+    --primary-dark: #c9340a;
+    --secondary-color: #111111;
+    --general-text: #252525;
+    --white: #ffffff;
+    --soft-white: #fafafa;
+    --section-border: #f4f4f4;
+    --font-stack: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    --font-size: 16px;
+}
