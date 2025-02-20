@@ -35,7 +35,6 @@ class PostTypeGenerator {
         if (!file_exists($controller_path)) {
 file_put_contents($controller_path, "<?php
 defined('ABSPATH') OR exit('No direct script access allowed');
-
 /*
 |----------------------------------------------------------------------
 | Controller for {$post_type}
@@ -75,12 +74,12 @@ class {$post_type}Controller {
     | The data is retrieved from the model and passed to the archive template.
     |
     */
-    public function index() {
+    public function archive() {
         \$model = new {$post_type}Model();
         \$data = \$model->getAllPosts(); // Fetch all posts
 
         get_header();
-        get_template_part('app/views/' . strtolower(get_post_type()) . '/index', null, ['data' => \$data]);
+        get_template_part('app/views/' . strtolower(get_post_type()) . '/archive', null, ['data' => \$data]);
         get_footer();
     }
 
@@ -323,16 +322,30 @@ class {$post_type}Model {
 
 
         // Generate Views
-        if (!file_exists("$view_path/index.php")) {
-            file_put_contents("$view_path/index.php", "<?php
+        if (!file_exists("$view_path/archive.php")) {
+            file_put_contents("$view_path/archive.php", "<?php
 defined('ABSPATH') OR exit('No direct script access allowed');
-
 /**
- * Archive View for $post_type
- */
+* Archive View Template for Custom Post Type
+* 
+* This template dynamically generates the archive view for a custom 
+* post type. It ensures that the necessary structure exists and 
+* loads the relevant content from WordPress. Only variables from 
+* the controller or ACF should be used for data output.
+* 
+* Refer to ACF documentation for proper usage of ACF fields:
+* - Repeater Fields: https://www.advancedcustomfields.com/resources/repeater/
+* - Flexible Content Fields: https://www.advancedcustomfields.com/resources/flexible-content/
+* - Relationship Fields: https://www.advancedcustomfields.com/resources/relationship/
+* 
+* ⚠️ IMPORTANT: Do not write spaghetti code! 
+* Anyone who does will have their legs cut off. ⚔️
+*/
 ?>
 <div id=\"spotlight-inner\" class=\"container py-5\">
     
+    <?php get_template_part( 'app/Views/template-parts/global/breadcrumbs' ); ?>
+
     <!-- Spotlight Title Section -->
     <div id=\"spotlight-title\" class=\"animated fadeInDown text-center\">
         <h1><?php post_type_archive_title(); ?></h1>
@@ -340,47 +353,54 @@ defined('ABSPATH') OR exit('No direct script access allowed');
     
     <!-- Spotlight Note Section -->
     <div id=\"spotlight-note\" class=\"animated fadeInDown text-center mt-3\">
-    <?php if ( have_posts() ) : ?>
-        <ul>
-            <?php while ( have_posts() ) : the_post(); ?>
-                <li>
-                    <a href=\"<?php the_permalink(); ?>\"><?php the_title(); ?></a>
-                    <p><?php the_excerpt(); ?></p>
-                </li>
-            <?php endwhile; ?>
-        </ul>
-
-        <?php 
-        // Pagination
-        the_posts_pagination([
-            'mid_size'  => 2,
-            'prev_text' => __('« Previous', 'textdomain'),
-            'next_text' => __('Next »', 'textdomain'),
-        ]);
-        ?>
-
-    <?php else : ?>
-        <p><?php esc_html_e('No posts found.', 'textdomain'); ?></p>
-    <?php endif; ?>
+    <?php get_template_part( 'app/Views/template-parts/loop/loop' ); ?>
     </div><!-- spotlight note ends -->
     
-</div><!-- spotlight-inner -->
+</div><!-- spotlight-inner -->");
+        }
 
 
+        // Generate Views
+        if (!file_exists("$view_path/index.html")) {
+            file_put_contents("$view_path/index.html", "<!DOCTYPE html>
+<html>
+<head>
+    <title>403 Forbidden</title>
+</head>
+<body>
 
-    ");
+<p>Directory access is forbidden.</p>
+
+</body>
+</html>
+");
         }
 
         if (!file_exists("$view_path/single.php")) {
             file_put_contents("$view_path/single.php", "<?php
 defined('ABSPATH') OR exit('No direct script access allowed');
-
 /**
- * Single View for $post_type
- */
+* Single View Template for Custom Post Type
+* 
+* This template dynamically generates the single view for a custom 
+* post type. It ensures that the necessary structure exists and 
+* loads the relevant content from WordPress. Only variables from 
+* the controller or ACF should be used for data output.
+* 
+* Refer to ACF documentation for proper usage of ACF fields:
+* - Repeater Fields: https://www.advancedcustomfields.com/resources/repeater/
+* - Flexible Content Fields: https://www.advancedcustomfields.com/resources/flexible-content/
+* - Relationship Fields: https://www.advancedcustomfields.com/resources/relationship/
+* 
+* ⚠️ IMPORTANT: Do not write spaghetti code! 
+* Anyone who does will have their legs cut off. ⚔️
+*/
 ?>
 
 <div id=\"spotlight-inner\" class=\"container py-5\">
+
+    <?php get_template_part( 'app/Views/template-parts/global/breadcrumbs' ); ?>
+
     <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
     
     <!-- Spotlight Title Section -->
@@ -402,13 +422,28 @@ defined('ABSPATH') OR exit('No direct script access allowed');
         if (!file_exists("$view_path/taxonomy.php")) {
             file_put_contents("$view_path/taxonomy.php", "<?php
 defined('ABSPATH') OR exit('No direct script access allowed');
-
 /**
- * Taxonomy Archive View for $taxonomy
- */
+* Taxonomy Archive View Template for $taxonomy
+* 
+* This template dynamically generates the archive view for a custom 
+* taxonomy. It ensures that the necessary structure exists and 
+* loads the relevant content from WordPress. Only variables from 
+* the controller or ACF should be used for data output.
+* 
+* Refer to ACF documentation for proper usage of ACF fields:
+* - Repeater Fields: https://www.advancedcustomfields.com/resources/repeater/
+* - Flexible Content Fields: https://www.advancedcustomfields.com/resources/flexible-content/
+* - Relationship Fields: https://www.advancedcustomfields.com/resources/relationship/
+* 
+* ⚠️ IMPORTANT: Do not write spaghetti code! 
+* Anyone who does will have their legs cut off. ⚔️
+*/
 ?>
 
 <div id=\"spotlight-inner\" class=\"container py-5\">
+
+    <?php get_template_part( 'app/Views/template-parts/global/breadcrumbs' ); ?>
+
     <h1><?php single_term_title(); ?></h1>
     <p><?php echo term_description(); ?></p>
 
@@ -434,83 +469,4 @@ defined('ABSPATH') OR exit('No direct script access allowed');
 
     }
 
-
-
-    // Method to register custom post type
-    public static function register_post_type($post_type) {
-
-        $args = array(
-            'labels' => array(
-                'name' => __(ucfirst($post_type['label']), 'DoobleGniter'),
-                'singular_name' => __(ucfirst($post_type['label']), 'DoobleGniter'),
-                'add_new' => __('Add New', 'DoobleGniter'),
-                'add_new_item' => __('Add New ' . ucfirst($post_type['label']), 'DoobleGniter'),
-                'edit_item' => __('Edit ' . ucfirst($post_type['label']), 'DoobleGniter'),
-                'new_item' => __('New ' . ucfirst($post_type['label']), 'DoobleGniter'),
-                'view_item' => __('View ' . ucfirst($post_type['label']), 'DoobleGniter'),
-                'search_items' => __('Search ' . ucfirst($post_type['label']), 'DoobleGniter'),
-                'not_found' => __('No ' . $post_type['label'] . ' found', 'DoobleGniter'),
-                'not_found_in_trash' => __('No ' . $post_type['label'] . ' found in Trash', 'DoobleGniter'),
-                'all_items' => __('All ' . ucfirst($post_type['label']), 'DoobleGniter'),
-                'archives' => __(ucfirst($post_type['label']) . ' Archives', 'DoobleGniter'),
-                'insert_into_item' => __('Insert into ' . $post_type['label'], 'DoobleGniter'),
-                'uploaded_to_this_item' => __('Uploaded to this ' . $post_type['label'], 'DoobleGniter'),
-            ),
-            'public' => true,
-            'show_in_rest' => true, // For Gutenberg support
-            'has_archive' => true,  // Enable archive page
-            'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
-            'rewrite' => array('slug' =>  $post_type['slug']),
-            'menu_icon' => $post_type['menu_icon'], // Set the dashboard icon
-
-        );
-
-        register_post_type($post_type['name'], $args);
-    }
-
-    // Method to register taxonomy for the custom post type
-    public static function register_taxonomy($post_type) {
-
-        if( isset($post_type['taxonomies']) && !empty($post_type['taxonomies']) ){
-
-            foreach ($post_type['taxonomies'] as $key => $taxonomy) {
-                
-                $args = array(
-                    'hierarchical' => true, // Set to false for non-hierarchical taxonomy
-                    'labels' => array(
-                        'name'                  => __(ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['name'])), 'DoobleGniter'),
-                        'singular_name'         => __(ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['singular_name'])), 'DoobleGniter'),
-                        'search_items'          => __('Search ' . ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['name'])), 'DoobleGniter'),
-                        'all_items'             => __('All ' . ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['name'])), 'DoobleGniter'),
-                        'parent_item'           => __('Parent ' . ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['singular_name'])), 'DoobleGniter'),
-                        'parent_item_colon'     => __('Parent ' . ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['singular_name'])).':.', 'DoobleGniter'),
-                        'edit_item'             => __('Edit ' . ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['singular_name'])), 'DoobleGniter'),
-                        'update_item'           => __('Update ' . ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['singular_name'])), 'DoobleGniter'),
-                        'add_new_item'          => __('Add New ' . ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['singular_name'])), 'DoobleGniter'),
-                        'new_item_name'         => __('New ' . ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['singular_name'])).' Name', 'DoobleGniter'),
-                        'menu_name'             => __(ucfirst($post_type['label']) . ' '.__(ucfirst($taxonomy['name'])), 'DoobleGniter'),
-                    ),
-                    'show_ui' => true,
-                    'show_in_rest' => true, // Enable in REST API for Gutenberg
-                    'query_var' => true,
-                    'rewrite' => array(
-                        'slug' =>  $post_type['slug'] . '-'.__(strtolower($taxonomy['singular_name'])),
-                        'with_front' => false,
-                    ),
-                );
-                // var_dump( __(strtolower($taxonomy['singular_name'])) );die();
-                register_taxonomy($post_type['name'] . '_'.__(strtolower($taxonomy['singular_name'])), $post_type['name'], $args);
-
-            }
-
-
-        }
-
-    }
-
-    // Method to load translation files
-    public static function load_translations() {
-        load_plugin_textdomain('DoobleGniter', false, plugin_dir_path(__FILE__) . 'languages');
-    }
-    
 }

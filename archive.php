@@ -39,7 +39,7 @@ if ( is_post_type_archive() ) {
             $controller = new $controller_class();
 
             // Call the index() method dynamically
-            $controller->index();
+            $controller->archive();
 
         } else {
             // If the controller class does not exist, log an error

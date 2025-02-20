@@ -2,6 +2,42 @@
 defined('ABSPATH') OR exit('No direct script access allowed');
 
 
+
+
+/*
+|----------------------------------------------------------------------
+| Auto-load Providers Configuration Handler
+|----------------------------------------------------------------------
+|
+| This section will automatically include provider files based on the
+| defined names in the configuration.
+|
+| Example: If 'post-type-generator' is defined, it will load
+| app/providers/PostTypeGenerator.php
+|
+*/
+
+if ( isset( $GLOBALS['config']['providers'] ) && is_array( $GLOBALS['config']['providers'] ) ) {
+    foreach ( $GLOBALS['config']['providers'] as $provider ) {
+
+        // Construct the provider file path
+        $provider_file = get_template_directory() . '/app/Providers/' . $provider . '.php';
+
+        // Check if the provider file exists
+            if ( file_exists( $provider_file ) ) {
+                
+            // Include the provider file
+            require_once $provider_file;
+
+        } else {
+            // Log an error if the provider file doesn't exist
+            error_log( "Provider file '{$provider}' not found." );
+        }
+
+    }
+}
+
+
 /*
 |----------------------------------------------------------------------
 | Hook Files Auto-loader Configuration
@@ -34,36 +70,31 @@ if ( isset( $GLOBALS['config']['hooks'] ) && is_array( $GLOBALS['config']['hooks
 }
 
 
+
 /*
 |----------------------------------------------------------------------
-| Auto-load Providers Configuration Handler
+| Auto-load Services Configuration
 |----------------------------------------------------------------------
 |
-| This section will automatically include provider files based on the
+| This section will automatically include service files based on the 
 | defined names in the configuration.
 |
-| Example: If 'post-type-generator' is defined, it will load
-| app/providers/PostTypeGenerator.php
+| Services can be used for handling various functionalities like:
+| - SimplyApi
+|
+| To add a new service, define its name in the $GLOBALS['config']['services']
+| array, and place the corresponding file in the app/Services/ directory.
 |
 */
+if ( isset( $GLOBALS['config']['services'] ) && is_array( $GLOBALS['config']['services'] ) ) {
+    foreach ( $GLOBALS['config']['services'] as $service ) {
+        $service_file = get_template_directory() . '/app/Services/' . $service . 'Api.php';
 
-if ( isset( $GLOBALS['config']['providers'] ) && is_array( $GLOBALS['config']['providers'] ) ) {
-    foreach ( $GLOBALS['config']['providers'] as $provider ) {
-
-        // Construct the provider file path
-        $provider_file = get_template_directory() . '/app/Providers/' . $provider . '.php';
-        
-        // Check if the provider file exists
-        if ( file_exists( $provider_file ) ) {
-
-            // Include the provider file
-            require_once $provider_file;
-
+        if ( file_exists( $service_file ) ) {
+            require_once $service_file;
         } else {
-            // Log an error if the provider file doesn't exist
-            error_log( "Provider file '{$provider}' not found." );
+            error_log( "Service file '{$service}' not found." );
         }
-
     }
 }
 
@@ -95,6 +126,39 @@ if ( isset( $GLOBALS['config']['third-party'] ) && is_array( $GLOBALS['config'][
         } else {
             // Log an error if the third-party third-party file doesn't exist
             error_log( "Third-party third-party file '{$thirdparty}' not found." );
+        }
+
+    }
+}
+
+
+/*
+|---------------------------------------------------------------------- 
+| Auto-load Helper Functions Configuration Handler
+|---------------------------------------------------------------------- 
+| This section will automatically include helper function files based on 
+| the defined names in the configuration.
+|
+| Example: If 'helpers' is defined, it will load 
+| app/helpers/helpers.php
+|
+*/
+
+if ( isset( $GLOBALS['config']['helpers'] ) && is_array( $GLOBALS['config']['helpers'] ) ) {
+    foreach ( $GLOBALS['config']['helpers'] as $helper ) {
+
+        // Construct the helper file path for the helper
+        $helper_file = get_template_directory() . '/app/helpers/' . $helper . '.php';
+        
+        // Check if the helper file exists
+        if ( file_exists( $helper_file ) ) {
+
+            // Include the helper file
+            require_once $helper_file;
+
+        } else {
+            // Log an error if the helper file doesn't exist
+            error_log( "Helper file '{$helper}' not found." );
         }
 
     }

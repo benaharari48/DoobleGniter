@@ -11,7 +11,7 @@ defined('ABSPATH') OR exit('No direct script access allowed');
 |
 */
 
-$GLOBALS['config']['post_types'] = [
+$GLOBALS['config']['custom_post_types'] = [
     [
         'name'     => 'myfirstcpt',
         'slug'     => 'my-first-cpt',
@@ -139,11 +139,12 @@ $GLOBALS['config']['required_plugins'] = [
 */
 
 $GLOBALS['config']['hooks'] = [
-    'enqueue',    // Will load app/hooks/enqueue.php
-    'security',   // Will load app/hooks/security.php
-    'tags',       // Will load app/hooks/tags.php
-    'widgets',    // Will load app/hooks/widgets.php
-    'images',     // Will load app/hooks/images.php
+    'enqueue',          // Will load app/hooks/enqueue.php
+    'security',         // Will load app/hooks/security.php
+    'tags',             // Will load app/hooks/tags.php
+    'widgets',          // Will load app/hooks/widgets.php
+    'images',           // Will load app/hooks/images.php
+    'wp-registers',     // Will load app/hooks/wp-registers.php
 ];
 
 
@@ -164,6 +165,30 @@ $GLOBALS['config']['hooks'] = [
 
 $GLOBALS['config']['providers'] = [
     'PostTypeGenerator', // Will load app/providers/PostTypeGenerator.php
+    'ServiceGenerator', // Will load app/providers/ServiceGenerator.php
+];
+
+
+
+/*
+|----------------------------------------------------------------------
+| Auto-load Services Configuration
+|----------------------------------------------------------------------
+|
+| This file holds the configuration for all your auto-load service files.
+| Define all your service files here, and they will be automatically included
+| based on the defined names.
+|
+| Example:
+|   'SimpleApi' => Will load app/services/SimpleApi.php
+|
+*/
+
+$GLOBALS['config']['services'] = [
+    'Simple', // Will load app/services/SimpleApi.php
+    'BearerToken', // Will load app/services/BearerTokenApi.php
+    'Comax', // Will load app/services/ComaxApi.php
+    'Test', // Will load app/services/ComaxApi.php
 ];
 
 
@@ -184,5 +209,41 @@ $GLOBALS['config']['providers'] = [
 $GLOBALS['config']['third-party'] = [
     'WooCommerce',  // Will load app/third-party/WooCommerce.php
     'ContactForm7', // Will load app/third-party/ContactForm7.php
+    'Yoast',        // Will load app/third-party/Yoast.php
     // Add more third-party third-party here as needed
 ];
+
+
+/*
+|---------------------------------------------------------------------- 
+| Auto-load Helper Functions Configuration
+|---------------------------------------------------------------------- 
+| This file holds the configuration for loading your helper function files.
+| Define all your helper function files here, and they will be automatically 
+| included when needed.
+| 
+| Example:
+|   'helpers' => Will load app/helpers/helpers.php
+|
+*/
+
+$GLOBALS['config']['helpers'] = [
+    'helpers' => 'app/helpers/helpers.php',  // Will load app/helpers/helpers.php
+    // Add more helper files here as needed
+];
+
+
+/*
+|---------------------------------------------------------------------- 
+| Disable Gutenberg Configuration
+|---------------------------------------------------------------------- 
+| This section configures whether the Gutenberg editor should be disabled.
+| By setting 'disable_gutenberg' to TRUE, the Gutenberg editor will be 
+| turned off for all posts, and the classic editor will be used instead.
+| 
+| Example:
+|   'disable_gutenberg' => TRUE, // Set this to TRUE to disable Gutenberg
+|
+*/
+
+$GLOBALS['config']['disable_gutenberg'] = TRUE;

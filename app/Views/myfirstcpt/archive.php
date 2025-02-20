@@ -1,9 +1,9 @@
 <?php
 defined('ABSPATH') OR exit('No direct script access allowed');
 /**
-* Single View Template for Custom Post Type
+* Archive View Template for Custom Post Type
 * 
-* This template dynamically generates the single view for a custom 
+* This template dynamically generates the archive view for a custom 
 * post type. It ensures that the necessary structure exists and 
 * loads the relevant content from WordPress. Only variables from 
 * the controller or ACF should be used for data output.
@@ -17,22 +17,18 @@ defined('ABSPATH') OR exit('No direct script access allowed');
 * Anyone who does will have their legs cut off. ⚔️
 */
 ?>
-
 <div id="spotlight-inner" class="container py-5">
-
+    
     <?php get_template_part( 'app/Views/template-parts/global/breadcrumbs' ); ?>
 
-    <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-    
     <!-- Spotlight Title Section -->
     <div id="spotlight-title" class="animated fadeInDown text-center">
-        <h1><?php the_title(); ?></h1>
+        <h1><?php post_type_archive_title(); ?></h1>
     </div><!-- spotlight title ends -->
     
     <!-- Spotlight Note Section -->
     <div id="spotlight-note" class="animated fadeInDown text-center mt-3">
-        <p><?php the_content(); ?></p>
+    <?php get_template_part( 'app/Views/template-parts/loop/loop' ); ?>
     </div><!-- spotlight note ends -->
     
-    <?php endwhile; endif; ?>
 </div><!-- spotlight-inner -->

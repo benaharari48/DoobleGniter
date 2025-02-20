@@ -21,7 +21,7 @@ if ( is_tax() || is_category() || is_tag() ) {
     // Get the current taxonomy slug
     $current_taxonomy = get_queried_object()->taxonomy;
 
-    $current_post_type = get_taxonomy($current_taxonomy)->object_type['name']; // Get the current post type (e.g., 'post', 'page', custom post type)
+    $current_post_type = get_taxonomy($current_taxonomy)->object_type[0]; // Get the current post type (e.g., 'post', 'page', custom post type)
 
     // Define the path to the controller file based on taxonomy name
     $controller_path = get_template_directory() . "/app/Controllers/{$current_post_type}Controller.php";

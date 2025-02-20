@@ -1,6 +1,5 @@
 <?php
 defined('ABSPATH') OR exit('No direct script access allowed');
-
 /*
 |----------------------------------------------------------------------
 | Controller for Cars
@@ -40,12 +39,12 @@ class CarsController {
     | The data is retrieved from the model and passed to the archive template.
     |
     */
-    public function index() {
+    public function archive() {
         $model = new CarsModel();
         $data = $model->getAllPosts(); // Fetch all posts
 
         get_header();
-        get_template_part('app/views/' . strtolower(get_post_type()) . '/index', null, ['data' => $data]);
+        get_template_part('app/views/' . strtolower(get_post_type()) . '/archive', null, ['data' => $data]);
         get_footer();
     }
 
