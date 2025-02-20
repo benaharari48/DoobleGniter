@@ -39,6 +39,6 @@ defined('ABSPATH') OR exit('No direct script access allowed');
 
     <!-- Discover More Button -->
     <div id="spotlight-button-holder" class="animated fadeInDown text-center mt-4">
-        <a href="/user_guide/index.html" id="spotlight-link" class="btn btn-primary">Discover more</a>
+        <a href="<?php echo site_url(); ?>" id="spotlight-link" class="btn btn-primary">Discover more</a>
     </div><!-- spotlight-button ends -->
 </div><!-- spotlight-inner -->
